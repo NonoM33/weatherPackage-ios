@@ -2,68 +2,56 @@
 //  File.swift
 //  
 //
-//  Created by renaud on 15/11/2023.
+//  Created by renaud on 20/11/2023.
 //
 
 import Foundation
 
 public struct RESTWeatherCity: Codable {
-    public let lat: Double
-    public let lon: Double
-    public let timezone: String
-    public let timezoneOffset: Int
-    public let current: CurrentWeather
-    public let minutely: [MinutelyWeather]
 
-    public enum CodingKeys: String, CodingKey {
-        case lat, lon, timezone, current, minutely
-        case timezoneOffset = "timezone_offset"
-    }
+   public var weather: [WeatherCondition]
+   public var base: String
+   public var main: Main
+   public var visibility: Int
+   public var wind: Wind
+   public var clouds: Clouds
+   public var dt: Int
+   public var sys: Sys
+   public var timezone: Int
+   public var id: Int
+   public var name: String
+   public var cod: Int
 }
 
-public struct CurrentWeather: Codable {
-    public let dt: Int
-    public let sunrise: Int
-    public let sunset: Int
-    public let temp: Double
-    public let feelsLike: Double
-    public let pressure: Int
-    public let humidity: Int
-    public let dewPoint: Double
-    public let uvi: Double
-    public let clouds: Int
-    public let visibility: Int
-    public let windSpeed: Double
-    public let windDeg: Int
-    public let weather: [WeatherDetail]
-    public let rain: Rain?
-
-    public enum CodingKeys: String, CodingKey {
-        case dt, sunrise, sunset, temp, pressure, humidity, clouds, visibility, weather, rain
-        case feelsLike = "feels_like"
-        case dewPoint = "dew_point"
-        case windSpeed = "wind_speed"
-        case windDeg = "wind_deg"
-        case uvi
-    }
+public struct WeatherCondition: Codable {
+    public var id: Int
+    public var main: String
+    public var description: String
+    public var icon: String
 }
 
-public struct WeatherDetail: Codable {
-    public let id: Int
-    public let main: String
-    public let description: String
-    public let icon: String
+public struct Main: Codable {
+    public var temp: Double
+    public var feels_like: Double
+    public var temp_min: Double
+    public var temp_max: Double
+    public var pressure: Int
+    public var humidity: Int
 }
 
-public struct Rain: Codable {
-    public let oneHour: Double
-
-    public enum CodingKeys: String, CodingKey {
-        case oneHour = "1h"
-    }
+public struct Wind: Codable {
+    public var speed: Double
+    public var deg: Int
 }
 
-public struct MinutelyWeather: Codable {
-    public let dt: Int
-    public let precipitation: Double
+public struct Clouds: Codable {
+    public var all: Int
+}
+
+public struct Sys: Codable {
+    public var type: Int
+    public var id: Int
+    public var country: String
+    public var sunrise: Int
+    public var sunset: Int
 }

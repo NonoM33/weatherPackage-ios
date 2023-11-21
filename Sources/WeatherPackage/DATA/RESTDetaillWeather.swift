@@ -8,16 +8,11 @@
 import Foundation
 
 public struct RESTDetaillWeather: Codable {
-    public let lat: Double
-    public let lon: Double
-    public let timezone: String
-    public let timezoneOffset: Int
     public let current: CurrentWeather
     public let minutely: [MinutelyWeather]
 
     public enum CodingKeys: String, CodingKey {
-        case lat, lon, timezone, current, minutely
-        case timezoneOffset = "timezone_offset"
+        case current, minutely
     }
 }
 
