@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public class WeatherService {
 
@@ -15,25 +16,32 @@ public class WeatherService {
 
     private init() {}
 
+  
     public func fetchCurrentWeather(latitude: Double, longitude: Double, completion: @escaping (Result<RESTWeatherGlobal, Error>) -> Void) {
-        var restGlobal = RESTWeatherGlobal(RESTWeatherCity: nil, RESTDetaillWeather: nil)
-        apiClient.fetchWeatherForCity(latitude: latitude, longitude: longitude) { [weak self] result in
+        fetchWeatherCity(latitude: latitude, longitude: longitude) { [weak self] result in
             switch result {
             case .success(let restWeatherCity):
-                restGlobal.RESTWeatherCity = restWeatherCity
-                self?.apiClient.fetchWeatherDetail(latitude: latitude, longitude: longitude) { result in
-                    switch result {
-                    case .success(let restWeatherDetail):
-                        restGlobal.RESTDetaillWeather = restWeatherDetail
-                        completion(.success(restGlobal))
-                    case .failure(let failure):
-                        print(failure)
-                        completion(.failure(failure))
-                    }
-                }
-            case .failure(let failure):
-                print(failure)
-                completion(.failure(failure))
+                self?.fetchWeatherDetail(latitude: latitude, longitude: longitude, restWeatherCity: restWeatherCity, completion: completion)
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+        // MARK: - Private
+
+    private func fetchWeatherCity(latitude: Double, longitude: Double, completion: @escaping (Result<RESTWeatherCity, Error>) -> Void) {
+        apiClient.fetchWeatherForCity(latitude: latitude, longitude: longitude, completion: completion)
+    }
+
+    private func fetchWeatherDetail(latitude: Double, longitude: Double, restWeatherCity: RESTWeatherCity, completion: @escaping (Result<RESTWeatherGlobal, Error>) -> Void) {
+        apiClient.fetchWeatherDetail(latitude: latitude, longitude: longitude) { result in
+            switch result {
+            case .success(let restWeatherDetail):
+                let restGlobal = RESTWeatherGlobal(RESTWeatherCity: restWeatherCity, RESTDetaillWeather: restWeatherDetail)
+                completion(.success(restGlobal))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
