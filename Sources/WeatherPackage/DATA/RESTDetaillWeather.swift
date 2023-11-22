@@ -10,9 +10,10 @@ import Foundation
 public struct RESTDetaillWeather: Codable {
     public let current: CurrentWeather
     public let minutely: [MinutelyWeather]
+    public let hourly: [HourlyWeather]
 
     public enum CodingKeys: String, CodingKey {
-        case current, minutely
+        case current, minutely, hourly
     }
 }
 
@@ -62,3 +63,40 @@ public struct MinutelyWeather: Codable {
     public let dt: Int
     public let precipitation: Double
 }
+
+public struct HourlyWeather: Codable {
+    public let dt: Int
+    public let temp: Double
+    public let feelsLike: Double
+    public let pressure: Int
+    public let humidity: Int
+    public let dewPoint: Double
+    public let uvi: Double
+    public let clouds: Int
+    public let visibility: Int
+    public let windSpeed: Double
+    public let windDeg: Int
+    public let windGust: Double
+    public let weather: [WeatherDetail]
+    public let pop: Double
+    public let rain: Rain?
+
+    enum CodingKeys: String, CodingKey {
+        case dt
+        case temp
+        case feelsLike = "feels_like"
+        case pressure
+        case humidity
+        case dewPoint = "dew_point"
+        case uvi
+        case clouds
+        case visibility
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+        case windGust = "wind_gust"
+        case weather
+        case pop
+        case rain
+    }
+}
+
