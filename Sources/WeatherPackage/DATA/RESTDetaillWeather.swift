@@ -11,9 +11,10 @@ public struct RESTDetaillWeather: Codable {
     public let current: CurrentWeather
     public let minutely: [MinutelyWeather]
     public let hourly: [HourlyWeather]
+    public let daily: [DailyWeather]
 
     public enum CodingKeys: String, CodingKey {
-        case current, minutely, hourly
+        case current, minutely, hourly, daily
     }
 }
 
@@ -100,3 +101,60 @@ public struct HourlyWeather: Codable {
     }
 }
 
+public struct DailyWeather: Codable {
+    public let dt: Int
+    public let sunrise: Int
+    public let sunset: Int
+    public let moonrise: Int
+    public let moonset: Int
+    public let moonPhase: Double
+    public let temp: Temperature
+    public let feelsLike: FeelsLike
+    public let pressure: Int
+    public let humidity: Int
+    public let dewPoint: Double
+    public let windSpeed: Double
+    public let windDeg: Int
+    public let windGust: Double
+    public let weather: [WeatherDetail]
+    public let clouds: Int
+    public let pop: Double
+    public let uvi: Double
+
+    public enum CodingKeys: String, CodingKey {
+        case dt
+        case sunrise
+        case sunset
+        case moonrise
+        case moonset
+        case moonPhase = "moon_phase"
+        case temp
+        case feelsLike = "feels_like"
+        case pressure
+        case humidity
+        case dewPoint = "dew_point"
+        case windSpeed = "wind_speed"
+        case windDeg = "wind_deg"
+        case windGust = "wind_gust"
+        case weather
+        case clouds
+        case pop
+        case uvi
+    }
+}
+
+public struct Temperature: Codable {
+    public let day: Double
+    public let min: Double
+    public let max: Double
+    public let night: Double
+    public let eve: Double
+    public let morn: Double
+}
+
+public struct FeelsLike: Codable {
+    public let day: Double
+    public let night: Double
+    public let eve: Double
+    public let morn: Double
+}
