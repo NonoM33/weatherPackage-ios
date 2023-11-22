@@ -10,20 +10,6 @@ import UIKit
 
 public class WeatherTools {
 
-    public static func gradientLayerForTemperature(kelvin: Double, frame: CGRect) -> CAGradientLayer {
-        let topColor = colorForTemperature(kelvin: kelvin)
-        let bottomColor = UIColor.white
-
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = frame
-        gradientLayer.colors = [topColor.cgColor, bottomColor.cgColor]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-
-        return gradientLayer
-    }
-
     public static func colorForTemperature(kelvin: Double) -> UIColor {
         let celsius = kelvin - 273.15
 
@@ -52,4 +38,15 @@ public class WeatherTools {
     public static func iconTemperature(icon: String) -> UIImage? {
         return UIImage(named: icon)
     }
+
+    public static func convertUnixTimeToDate(unixTime: Int, 
+                                      dateFormat: String = "dd/MM/yyyy HH:mm") -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(unixTime))
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: date)
+    }
+
 }
