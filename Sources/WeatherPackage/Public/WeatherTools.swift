@@ -44,7 +44,7 @@ public class WeatherTools {
         let date = Date(timeIntervalSince1970: TimeInterval(unixTime))
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-        dateFormatter.locale = NSLocale.current
+        dateFormatter.locale = Locale(identifier: "fr_FR")
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.string(from: date)
     }
