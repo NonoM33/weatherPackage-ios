@@ -19,20 +19,20 @@ public struct RESTDetaillWeather: Codable {
 }
 
 public struct CurrentWeather: Codable {
-    public let dt: Int
-    public let sunrise: Int
-    public let sunset: Int
-    public let temp: Double
-    public let feelsLike: Double
-    public let pressure: Int
-    public let humidity: Int
-    public let dewPoint: Double
-    public let uvi: Double
-    public let clouds: Int
-    public let visibility: Int
-    public let windSpeed: Double
-    public let windDeg: Int
-    public let weather: [WeatherDetail]
+    public let dt: Int?
+    public let sunrise: Int?
+    public let sunset: Int?
+    public let temp: Double?
+    public let feelsLike: Double?
+    public let pressure: Int?
+    public let humidity: Int?
+    public let dewPoint: Double?
+    public let uvi: Double?
+    public let clouds: Int?
+    public let visibility: Int?
+    public let windSpeed: Double?
+    public let windDeg: Int?
+    public let weather: [WeatherDetail]?
     public let rain: Rain?
 
     public enum CodingKeys: String, CodingKey {
@@ -46,14 +46,14 @@ public struct CurrentWeather: Codable {
 }
 
 public struct WeatherDetail: Codable {
-    public let id: Int
-    public let main: String
-    public let description: String
-    public let icon: String
+    public let id: Int?
+    public let main: String?
+    public let description: String?
+    public let icon: String?
 }
 
 public struct Rain: Codable {
-    public let oneHour: Double
+    public let oneHour: Double?
 
     public enum CodingKeys: String, CodingKey {
         case oneHour = "1h"
@@ -61,26 +61,26 @@ public struct Rain: Codable {
 }
 
 public struct MinutelyWeather: Codable {
-    public let dt: Int
-    public let precipitation: Double
+    public let dt: Int?
+    public let precipitation: Double?
 }
 
 public struct HourlyWeather: Codable {
-    public let dt: Int
-    public let temp: Double
-    public let feelsLike: Double
-    public let pressure: Int
-    public let humidity: Int
-    public let dewPoint: Double
-    public let uvi: Double
-    public let clouds: Int
-    public let visibility: Int
-    public let windSpeed: Double
-    public let windDeg: Int
-    public let windGust: Double
-    public let weather: [WeatherDetail]
-    public let pop: Double
-    public let rain: Rain?
+    public let dt: Int?
+    public let temp: Double?
+    public let feelsLike: Double?
+    public let pressure: Int?
+    public let humidity: Int?
+    public let dewPoint: Double?
+    public let uvi: Double?
+    public let clouds: Int?
+    public let visibility: Int?
+    public let windSpeed: Double?
+    public let windDeg: Int?
+    public let windGust: Double?
+    public let weather: [WeatherDetail]?
+    public let pop: Double?
+    public let rain: Rain??
 
     enum CodingKeys: String, CodingKey {
         case dt
@@ -102,24 +102,24 @@ public struct HourlyWeather: Codable {
 }
 
 public struct DailyWeather: Codable {
-    public let dt: Int
-    public let sunrise: Int
-    public let sunset: Int
-    public let moonrise: Int
-    public let moonset: Int
-    public let moonPhase: Double
-    public let temp: Temperature
-    public let feelsLike: FeelsLike
-    public let pressure: Int
-    public let humidity: Int
-    public let dewPoint: Double
-    public let windSpeed: Double
-    public let windDeg: Int
-    public let windGust: Double
-    public let weather: [WeatherDetail]
-    public let clouds: Int
-    public let pop: Double
-    public let uvi: Double
+    public let dt: Int?
+    public let sunrise: Int?
+    public let sunset: Int?
+    public let moonrise: Int?
+    public let moonset: Int?
+    public let moonPhase: Double?
+    public let temp: Temperature?
+    public let feelsLike: FeelsLike?
+    public let pressure: Int?
+    public let humidity: Int?
+    public let dewPoint: Double?
+    public let windSpeed: Double?
+    public let windDeg: Int?
+    public let windGust: Double?
+    public let weather: [WeatherDetail]?
+    public let clouds: Int?
+    public let pop: Double?
+    public let uvi: Double?
 
     public enum CodingKeys: String, CodingKey {
         case dt
@@ -144,17 +144,17 @@ public struct DailyWeather: Codable {
 }
 
 public struct Temperature: Codable {
-    public let day: Double
-    public let min: Double
-    public let max: Double
-    public let night: Double
-    public let eve: Double
-    public let morn: Double
+    public let day: Double?
+    public let min: Double?
+    public let max: Double?
+    public let night: Double?
+    public let eve: Double?
+    public let morn: Double?
 }
 
 public struct FeelsLike: Codable {
-    public let day: Double
-    public let night: Double
-    public let eve: Double
-    public let morn: Double
+    public let day: Double?
+    public let night: Double?
+    public let eve: Double?
+    public let morn: Double?
 }
