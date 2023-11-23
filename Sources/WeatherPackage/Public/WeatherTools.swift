@@ -35,10 +35,6 @@ public class WeatherTools {
         return kelvin - 273.15
     }
 
-    public static func iconTemperature(icon: String) -> UIImage? {
-        return UIImage(named: icon)
-    }
-
     public static func convertUnixTimeToDate(unixTime: Int, 
                                       dateFormat: String = "dd/MM/yyyy HH:mm") -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(unixTime))
