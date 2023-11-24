@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public class WeatherService {
+public final class WeatherService {
 
     public static let shared = WeatherService()
 
@@ -16,7 +16,10 @@ public class WeatherService {
 
     private init() {}
 
-  
+    public func setAPIKey(_ apiKey: String) {
+        apiClient.setAPIKey(apiKey)
+    }
+
     public func fetchCurrentWeather(latitude: Double, longitude: Double, completion: @escaping (Result<RESTWeatherGlobal, Error>) -> Void) {
         fetchWeatherCity(latitude: latitude, longitude: longitude) { [weak self] result in
             switch result {

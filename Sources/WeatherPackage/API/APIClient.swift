@@ -12,13 +12,19 @@ class APIClient {
     static let shared = APIClient()
 
     private let session: URLSession
+    private var apiKey: String?
 
     init(session: URLSession = .shared) {
         self.session = session
     }
 
+    func setAPIKey(_ apiKey: String) {
+        self.apiKey = apiKey
+    }
+
     func fetchWeatherForCity(latitude: Double, longitude: Double, completion: @escaping (Result<RESTWeatherCity, Error>) -> Void) {
-        performRequest(for: .weather(latitude: latitude, longitude: longitude)) { result in
+        guard let apiKey = apiKey else { print("API KEY NOT SETUP"); return }
+        performRequest(for: .weather(latitude: latitude, longitude: longitude, apiKey: apiKey)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
@@ -37,7 +43,8 @@ class APIClient {
     }
 
     func fetchWeatherDetail(latitude: Double, longitude: Double, completion: @escaping (Result<RESTDetaillWeather, Error>) -> Void) {
-        performRequest(for: .weatherDetail(latitude: latitude, longitude: longitude)) { result in
+        guard let apiKey = apiKey else { print("API KEY NOT SETUP"); return }
+        performRequest(for: .weatherDetail(latitude: latitude, longitude: longitude, apiKey: apiKey)) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
