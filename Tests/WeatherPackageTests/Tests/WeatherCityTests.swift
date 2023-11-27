@@ -17,6 +17,7 @@ class WeatherCityTests: XCTestCase {
         super.setUp()
         fakeSession = FakeURLSession()
         apiclient = APIClient(session: fakeSession)
+        apiclient.setAPIKey("fake_api")
     }
 
     override func tearDown() {
