@@ -11,9 +11,11 @@ public struct RESTDetaillWeather: Codable {
     public let current: CurrentWeather
     public let hourly: [HourlyWeather]
     public let daily: [DailyWeather]
+    public let lat: Double?
+    public let lon: Double?
 
     public enum CodingKeys: String, CodingKey {
-        case current, hourly, daily
+        case current, hourly, daily, lat, lon
     }
 }
 
