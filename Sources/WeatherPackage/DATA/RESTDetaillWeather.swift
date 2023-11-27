@@ -9,12 +9,11 @@ import Foundation
 
 public struct RESTDetaillWeather: Codable {
     public let current: CurrentWeather
-    public let minutely: [MinutelyWeather]
     public let hourly: [HourlyWeather]
     public let daily: [DailyWeather]
 
     public enum CodingKeys: String, CodingKey {
-        case current, minutely, hourly, daily
+        case current, hourly, daily
     }
 }
 
@@ -58,11 +57,6 @@ public struct Rain: Codable {
     public enum CodingKeys: String, CodingKey {
         case oneHour = "1h"
     }
-}
-
-public struct MinutelyWeather: Codable {
-    public let dt: Int?
-    public let precipitation: Double?
 }
 
 public struct HourlyWeather: Codable {
